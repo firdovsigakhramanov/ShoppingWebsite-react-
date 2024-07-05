@@ -1,14 +1,22 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Drawer from '@mui/material/Drawer';
 import { useDispatch, useSelector } from 'react-redux';
-import { calculate, setDrawer } from '../redux/slices/basketSlice';
+import { calculate, setDrawer, removeProduct } from '../redux/slices/basketSlice';
+import { CiCirclePlus } from "react-icons/ci";
+import { CiCircleMinus } from "react-icons/ci";
+import '../css/header.css'
 
 function BasketWindow() {
     const { products, drawer, totalPrice } = useSelector(store => store.basket)
     const dispatch = useDispatch()
+    const [count, setCount] = useState(1);
+
     useEffect(() => {
         dispatch(calculate())
-    }, [])
+    }, [products])
+
+
+
     return (
         <Drawer onClose={() => dispatch(setDrawer())} open={drawer} anchor='right' >
             {
@@ -17,12 +25,18 @@ function BasketWindow() {
                         <div className='basket-product' key={product.id}>
                             <div className='basket-left basket-side'>
                                 <img className='basket-img' src={product.image} />
-                                <p className='basket-title'>{product.title}</p>
+                                <div className='basket-left__title-and-count'>
+                                    <p className='basket-title'>{product.title}</p>
+                                    <p className='basket-count'>
+                                        <CiCircleMinus onClick={() => (count > 1 ? setCount(count - 1) : setCount(1))} className='card-details__minus-icon' />
+                                        <span className='card-details__product-count'>{count}</span>
+                                        <CiCirclePlus  onClick={() => setCount(count + 1)} className='card-details__plus-icon' />
+                                    </p>
+                                </div>
                             </div>
                             <div className='basket-right basket-side'>
-                                <p className='basket-count'>({product.count})</p>
                                 <p className='basket-price'>{product.price}$</p>
-                                <button onClick={dispatch(removeProduct(id))} className='btn basket-btn'>Remove</button>
+                                <button onClick={() => dispatch(removeProduct(product.id))} className='btn basket-btn'>Remove</button>
                             </div>
                         </div>
                     )

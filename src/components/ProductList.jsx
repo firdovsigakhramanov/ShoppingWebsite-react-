@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAllProducts } from '../redux/slices/productSlice'
 import Card from './Card'
 import '../css/product-list.css'
+import ProductDetails from '../pages/ProductDetails'
 
 function ProductList() {
     const dispatch = useDispatch()

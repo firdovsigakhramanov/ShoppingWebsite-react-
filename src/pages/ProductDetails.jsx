@@ -11,7 +11,7 @@ function ProductDetails() {
     const { id } = useParams()
     const { products, selectedProduct } = useSelector((store) => store.product)
     const dispatch = useDispatch()
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(1);
     const { image, price, description, title } = selectedProduct
 
     useEffect(() => {
@@ -52,7 +52,7 @@ function ProductDetails() {
                 <button onClick={addBasket} className="card-details__button btn">Add to cart</button>
                 <p className="card-details__price">${selectedProduct.price}</p>
                 <div className="card-details__raiting">
-                    <CiCircleMinus onClick={() => (count > 0 ? setCount(count - 1) : setCount(0))} className='card-details__minus-icon' /> <span className='card-details__product-count'>{count}</span> <CiCirclePlus onClick={() => setCount(count + 1)} className='card-details__plus-icon' />
+                    <CiCircleMinus onClick={() => (count > 1 ? setCount(count - 1) : setCount(1))} className='card-details__minus-icon' /> <span className='card-details__product-count'>{count}</span> <CiCirclePlus onClick={() => setCount(count + 1)} className='card-details__plus-icon' />
                 </div>
                 <p className="card-details__description">
                     {selectedProduct.description}
