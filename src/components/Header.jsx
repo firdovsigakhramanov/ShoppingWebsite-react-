@@ -10,6 +10,7 @@ import { setDrawer } from '../redux/slices/basketSlice';
 
 
 
+
 function Header() {
   const [theme, setTheme] = useState(true)
   const navigate = useNavigate()
@@ -31,16 +32,16 @@ function Header() {
   return (
     <div className='header'>
       <div className='header-logo' onClick={() => (navigate("/"))}>
-        <img src="./src/images/total-logo-energia-download-logos-2.png" alt="" />
-        <p className='header-logo__name'>Shop Shop</p>
+        <img src="total-logo-energia-download-logos-2.png" alt="" />
+        <p className='header-logo__name'>BRENDSHOP</p>
       </div>
       <div className='header__right-side'>
 
         <input type="text" className='header__search-input' placeholder='Enter product name...' />
         <div className='header-icons'>
-          {
+          {/* {
             theme ? <FaMoon onClick={changeTheme} /> : <CiLight onClick={changeTheme} />
-          }
+          } */}
           <Badge badgeContent={products.length} color="error">
             <CiShoppingBasket onClick={() => dispatch(setDrawer())} />
           </Badge>
